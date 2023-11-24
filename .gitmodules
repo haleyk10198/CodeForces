@@ -1,0 +1,3 @@
+[submodule "SSBH"]
+	path = SSBH
+	url = git@github.com:haleyk10198/SSBH.git
