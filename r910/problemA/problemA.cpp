@@ -7,7 +7,7 @@ namespace r910::problemA {
         int length, targeted;
         std::cin >> length >> targeted;
 
-        std::string str;
+        std::string str; std::cin >> str;
         std::cout << *solve(str, targeted);
     }
 
@@ -19,15 +19,15 @@ namespace r910::problemA {
 
         unsigned long prefixAs = 0;
         unsigned long prefixBs = 0;
-        for(int i = 0; (unsigned long) i < str.length(); ++i) {
+        for(unsigned long i = 0; i < str.length(); ++i) {
             (str[i] == 'A'? prefixAs: prefixBs)++;
-            auto baseLine = targeted - prefixBs;
+            auto baseLine = existing - prefixBs;
             if(baseLine == targeted) {
-                return std::make_unique<SingleOp>(i, 'A');
+                return std::make_unique<SingleOp>(i+1, 'A');
             }
 
             if(baseLine + (i+1) == targeted) {
-                return std::make_unique<SingleOp>(i, 'B');
+                return std::make_unique<SingleOp>(i+1, 'B');
             }
         }
 

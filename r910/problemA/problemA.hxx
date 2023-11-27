@@ -28,7 +28,7 @@ namespace r910::problemA {
     protected:
         std::ostream & print(std::ostream &os) const final {
             return os << 1 << std::endl
-                << mIdx << ' ' << mOperand;
+                << mIdx << ' ' << mOperand << std::endl;
         }
     public:
         SingleOp() = delete;
