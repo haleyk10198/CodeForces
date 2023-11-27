@@ -36,10 +36,10 @@ namespace r910::problemA {
 
 }
 
-#ifdef ONLINE_JUDGE
+#ifndef UNIT_TEST
 
 int main() {
-    repeatingCases(&r910::problemA::runTestCases);
+    common::repeatingCases(&r910::problemA::runTestCases);
 }
 
 #endif

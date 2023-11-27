@@ -3,4 +3,3 @@ assemble_executable(problemA
         HEADERS problemA.hxx common/test-case.hxx
 )
 
-target_add_cf_options(problemA_flattened)

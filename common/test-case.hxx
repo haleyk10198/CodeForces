@@ -1,7 +1,7 @@
 #include <iostream>
 #include <functional>
 
-namespace {
+namespace common {
     void repeatingCases(std::function<void()> const &solveEach) {
         int cases;
         std::cin >> cases;
