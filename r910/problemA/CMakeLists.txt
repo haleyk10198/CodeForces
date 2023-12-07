@@ -1,5 +1,5 @@
 assemble_executable(problemA
         SOURCE problemA.cpp
-        HEADERS problemA.hxx common/test-case.hxx
+        HEADERS problemA.hxx
+        INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/common
 )
-

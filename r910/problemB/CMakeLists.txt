@@ -1,6 +1,7 @@
 assemble_executable(problemB
         SOURCE main.cxx
-        HEADERS common/test-case.hxx common/int-math.hxx main.hxx
+        HEADERS main.hxx
+        INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/common
 )
 
 add_executable(tests tests.cxx)
