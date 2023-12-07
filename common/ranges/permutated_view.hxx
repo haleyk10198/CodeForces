@@ -6,7 +6,6 @@ namespace common::ranges {
     class permutated_view : public std::ranges::view_interface<permutated_view<R1, R2>> {
     private:
         R1 base_;
-        std::ranges::iterator_t<R2> cur_;
         R2 permutation_;
     public:
         permutated_view() = default;
@@ -19,20 +18,20 @@ namespace common::ranges {
         };
 
         struct iterator {
+            std::ranges::iterator_t<R2> cur_;
+            permutated_view *parent_;
             using reference = std::ranges::range_reference_t<R1>;
 
-            iterator() = delete;
+            iterator() = default;
 
-            iterator(permutated_view &parent) : parent_(&parent) {}
-
-            permutated_view &parent_;
+            explicit iterator(permutated_view &parent) : parent_(parent), cur_(parent.permutation_.begin()) {}
 
             reference operator*() const {
-                return parent_.base_[*parent_.cur];
+                return parent_->base_[*cur_];
             }
 
             iterator &operator++() {
-                *parent_.cur++;
+                ++cur_;
                 return *this;
             }
 
@@ -41,7 +40,7 @@ namespace common::ranges {
             }
 
             bool operator==(const sentinel &sent) const {
-                return parent_.cur_ == sent.s;
+                return cur_ == sent.s;
             }
         };
 
@@ -53,4 +52,13 @@ namespace common::ranges {
             return sentinel{std::ranges::end(permutation_)};
         }
     };
+
+    struct permutate_fn {
+        template<std::ranges::random_access_range R1, std::ranges::forward_range R2>
+        constexpr permutated_view<R1, R2> operator()(R1 &&input, R2 &&permutation) {
+            return permutated_view(input, permutation);
+        }
+    };
+
+    inline constexpr auto permutated = permutate_fn{};
 }
